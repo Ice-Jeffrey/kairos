@@ -5,7 +5,7 @@
 ########################################################
 
 # The directory of the raw logs
-raw_dir = "/the/absolute/path/of/cadets_e3/"
+raw_dir = "/mnt/d/Data/DARPA/CADETS-E3/"
 
 # The directory to save all artifacts
 artifact_dir = "./artifact/"
@@ -43,7 +43,7 @@ host = '/var/run/postgresql/'
 user = 'postgres'
 
 # The password to the database user
-password = 'postgres'
+password = 'password'
 
 # The port number for Postgres
 port = '5432'
