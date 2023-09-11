@@ -105,7 +105,7 @@ def gen_vectorized_graphs(cur, node2higvec, rel2vec, logger):
             if e[2] in include_edge_type:
                 edge_list.append(edge_temp)
         logger.info(f'2018-04-{day}, edge list len: {len(edge_list)}')
-        dataset = TemporalData()
+        # dataset = TemporalData()
         src = []
         dst = []
         msg = []
@@ -117,14 +117,15 @@ def gen_vectorized_graphs(cur, node2higvec, rel2vec, logger):
                 torch.cat([torch.from_numpy(node2higvec[i[0]]), rel2vec[i[2]], torch.from_numpy(node2higvec[i[1]])]))
             t.append(int(i[3]))
 
-        dataset.src = torch.tensor(src)
-        dataset.dst = torch.tensor(dst)
-        dataset.t = torch.tensor(t)
-        dataset.msg = torch.vstack(msg)
-        dataset.src = dataset.src.to(torch.long)
-        dataset.dst = dataset.dst.to(torch.long)
-        dataset.msg = dataset.msg.to(torch.float)
-        dataset.t = dataset.t.to(torch.long)
+        src = torch.tensor(src)
+        dst = torch.tensor(dst)
+        t = torch.tensor(t)
+        msg = torch.vstack(msg)
+        src = src.to(torch.long)
+        dst = dst.to(torch.long)
+        msg = msg.to(torch.float)
+        t = t.to(torch.long)
+        dataset = TemporalData(src=src, dst=dst, t=t, msg=msg)
         torch.save(dataset, graphs_dir + "/graph_4_" + str(day) + ".TemporalData.simple")
 
 if __name__ == "__main__":
